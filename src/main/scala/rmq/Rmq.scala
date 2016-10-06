@@ -7,6 +7,14 @@ import com.github.sstone.amqp.Amqp._
 import com.github.sstone.amqp.{Amqp, Consumer, ChannelOwner, ConnectionOwner}
 import com.rabbitmq.client.ConnectionFactory
 import scala.concurrent.duration._
+import scala.util.Random
+
+object RandomPhrase {
+  def createPhrase: String = {
+    val phrases = List("Hello", "Hey", "Yo!", "How's it going?")
+    phrases(Random.nextInt(phrases.size))
+  }
+}
 
 object Producer extends App {
   implicit val system = ActorSystem("mySystem")
@@ -21,7 +29,7 @@ object Producer extends App {
   waitForConnection(system, conn, producer).await(5, TimeUnit.SECONDS)
 
   // send a message
-  producer ! Publish("amq.direct", "my_key", "Hello world!".getBytes, properties = None, mandatory = true, immediate = false)
+  producer ! Publish("amq.direct", "my_key", RandomPhrase.createPhrase.getBytes, properties = None, mandatory = true, immediate = false)
 
   // give it some time before shutting everything down
   Thread.sleep(500)
@@ -66,7 +74,7 @@ object Consumer1 extends App {
   consumer ! AddQueue(QueueParameters(name = "my_queue", passive = false))
 
   // run the Producer sample now and see what happens
-  println("press enter...")
+  println("Waiting for messages. Press enter to exit...")
 
   System.in.read()
   system.shutdown()
