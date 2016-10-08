@@ -9,14 +9,8 @@ import com.rabbitmq.client.ConnectionFactory
 import scala.concurrent.duration._
 import scala.util.Random
 
-object RandomPhrase {
-  def createPhrase: String = {
-    val phrases = List("Hello", "Hey", "Yo!", "How's it going?")
-    phrases(Random.nextInt(phrases.size))
-  }
-}
 
-object Producer extends App {
+object Producer {
   implicit val system = ActorSystem("mySystem")
 
   // create an AMQP connection
@@ -28,8 +22,8 @@ object Producer extends App {
   // wait till everyone is actually connected to the broker
   waitForConnection(system, conn, producer).await(5, TimeUnit.SECONDS)
 
-  // send a message
-  producer ! Publish("amq.direct", "my_key", RandomPhrase.createPhrase.getBytes, properties = None, mandatory = true, immediate = false)
+  def sendMessage(message: Array[Byte]) =
+    producer ! Publish("amq.direct", "my_key", message, properties = None, mandatory = true, immediate = false)
 
   // give it some time before shutting everything down
   Thread.sleep(500)

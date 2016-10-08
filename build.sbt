@@ -5,6 +5,7 @@ version := "1.0"
 scalaVersion := "2.11.8"
 
 resolvers += "Twitter" at "http://maven.twttr.com"
+resolvers += "Kaliber Repository" at "https://jars.kaliber.io/artifactory/libs-release-local"
 
 val versions = new {
   val finatra = "2.2.0"
@@ -20,6 +21,8 @@ val versions = new {
 
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % versions.akka
 libraryDependencies += "com.github.sstone" %% "amqp-client" % versions.sstone
+libraryDependencies += "net.kaliber" %% "scala-pdf" % "0.11"
+
 
 libraryDependencies += "com.twitter" %% "finatra-http" % versions.finatra
 
