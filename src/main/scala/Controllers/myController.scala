@@ -7,7 +7,7 @@ import com.twitter.finatra.http.{HttpServer, Controller}
 import com.twitter.finatra.request.{QueryParam, RouteParam}
 import java.nio.file.{ Paths, Files }
 
-import rmq.{Consumer1, Producer}
+import rmq.Producer
 
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
@@ -35,14 +35,14 @@ class MyController @Inject() extends Controller {
       (firstName + emailAddress).getBytes
 
     println("publishing message")
-    val messageSent = Producer.sendMessage(pdf)
-    messageSent.onComplete {
-      case Success(response) => {
-        println("message sent")
-        Consumer1.test
-      }
-      case Failure(error) => println(error)
-    }
+    Producer.sendMessage(pdf)
+//    messageSent.onComplete {
+//      case Success(response) => {
+//        println("message sent")
+//        Consumer1.test
+//      }
+//      case Failure(error) => println(error)
+//    }
 
 //    Files write (`test.pdf`, pdf)
     response.ok.body("Your email will be sent shortly")
