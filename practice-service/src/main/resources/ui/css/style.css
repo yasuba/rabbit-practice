@@ -1,0 +1,18 @@
+h1, h3 {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+table, th, tr, td {
+  border: 1px solid grey;
+  padding: 10px;
+}
+.two-column-table {
+  margin: 40px 0 0 80px;
+  display: inline-block;
+}
+.response {
+  margin-top: 20px;
+}
+.selectSettings {
+  padding: 5px 0;
+}

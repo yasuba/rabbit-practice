@@ -6,3 +6,37 @@ project/target/
 .lib
 .DS_Store
 sbt
+
+elmUi/src/elm-stuff
+elmUi/tests/elm-stuff
+elmUi/js
+elmUi/target
+elmUi/elm-stuff
+
+*.class
+*.log
+.DS_Store
+
+# sbt specific
+sbt
+.sbt-local
+.cache
+.history
+.lib
+dist
+target
+lib_managed
+src_managed
+
+# IDE specific
+.idea
+*.iml
+
+project/target
+project/project/credentials.sbt
+
+practice-service/src/main/resources/admin-ui/*
+!practice-service/src/main/resources/admin-ui/.gitkeep
+!practice-service/src/main/resources/admin-ui/css/.gitkeep
+!practice-service/src/main/resources/admin-ui/js/.gitkeep
+

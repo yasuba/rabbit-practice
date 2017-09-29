@@ -1,0 +1,63 @@
+{
+  "id" : "cda5ca36-d986-4585-ab03-d3c86875590a",
+  "name" : "${broker.name}",
+  "modelVersion" : "6.0",
+  "authenticationproviders" : [ {
+    "secureOnlyMechanisms" : [],
+    "id" : "61a4cc29-774b-4ebc-a41c-352580eaa206",
+    "name" : "passwordFile",
+    "type" : "PlainPasswordFile",
+    "path" : "${passwd-location}",
+    "preferencesproviders" : [ {
+      "id" : "3643bb6b-53fe-4bb7-aace-b4e04cd94608",
+      "name" : "fileSystemPreferences",
+      "type" : "FileSystemPreferences",
+      "path" : "${qpid.work_dir}${file.separator}user.preferences.json"
+    } ]
+  } ],
+  "plugins" : [ {
+    "id" : "ce667718-4a3b-456b-8409-6a19b9777799",
+    "type" : "MANAGEMENT-HTTP",
+    "name" : "httpManagement"
+  }, {
+    "id" : "8efd158f-8a48-45c9-a343-72fadfcb309b",
+    "type" : "MANAGEMENT-JMX",
+    "name" : "jmxManagement"
+  } ],
+  "ports" : [ {
+    "id" : "15241177-56a5-46fc-b785-961b411c640e",
+    "name" : "AMQP",
+    "port" : "${qpid.amqp_port}",
+    "authenticationProvider" : "passwordFile",
+    "virtualhostaliases" : [ {
+      "id" : "1697f24a-b94b-481e-989d-c8afc4529dbc",
+      "name" : "defaultAlias",
+      "type" : "defaultAlias"
+    }, {
+      "id" : "e48a7be3-6362-4c87-bebf-6eb444a4fc43",
+      "name" : "hostnameAlias",
+      "type" : "hostnameAlias"
+    }, {
+      "id" : "aa27f0ac-2d81-48a1-b792-ccd1583ff417",
+      "name" : "nameAlias",
+      "type" : "nameAlias"
+    } ]
+  }, {
+    "id" : "4af3efa9-a003-40d0-8b4b-b85b9930fce6",
+    "name" : "HTTP",
+    "port" : "8347",
+    "authenticationProvider" : "passwordFile",
+    "protocols" : [ "HTTP" ]
+  } ],
+  "virtualhostnodes" : [ {
+    "id" : "cfbfeb43-f360-42fb-9fb6-2eb3b1e69189",
+    "name" : "default",
+    "type" : "JSON",
+    "defaultVirtualHostNode" : "true",
+    "virtualHostInitialConfiguration" : "{ \"type\" : \"DERBY\" }",
+    "lastUpdatedBy" : null,
+    "lastUpdatedTime" : 1458147432539,
+    "createdBy" : null,
+    "createdTime" : 0
+  } ]
+}
