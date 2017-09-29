@@ -1,3 +1,3 @@
 # rabbit-practice
 
-Messing around with finatra and rabbitMQ
+Messing around with http4s and rabbitMQ
